@@ -12,28 +12,15 @@ class Product extends Model
 {
    protected $table    = 'products';
    protected $fillable = [
-
-      'title',
+ 
+      'product_name_ar',
+      'product_name_en',
+      'desc_ar',
+      'desc_en',
       'photo',
-      'content',
-      'department_id',
-      'trade_id',
-      'manu_id',
-      'color_id',
-      'size_id',
-      'currency_id',
-      'price',
-      'stock',
-      'start_at',
-      'end_at',
-      'start_offer_at',
-      'end_offer_at',
-      'price_offer',
-      'other_data',
-      'weight',
-      'weight_id',
-      'status',
-      'reason',
+       'price',
+       'department_id',
+        
    ];
 
    public function files()
