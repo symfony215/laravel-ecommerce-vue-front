@@ -1,13 +1,23 @@
 
        @extends('admin.index')
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
 @push('js')
 
  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     
 </script> 
- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script type="text/javascript">
+  
+// In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+
+</script>
 
  </script>
 
@@ -46,55 +56,41 @@ $(document).ready(function(){
     <div class="box-header">
         <h3 class="box-title">{{ $title }}</h3>
     </div>
-    <!-- /.box-header -->
-    <!-- /. 
-    'product_name_ar',
-      'product_name_en',
-      'desc_ar',
-      'desc_en',
-      'photo',
-       'price',
-       'department_id', -->
-    <div class="box-body">
-        {!! Form::open(['url'=>aurl('products'),'files'=>true]) !!}
-        <div class="form-group">
-            {!! Form::label('product_name_ar',trans('admin.product_name_ar')) !!}
-            {!! Form::text('product_name_ar',$product->product_name_ar,['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('product_name_en',trans('admin.product_name_en')) !!}
-            {!! Form::text('product_name_en',$product->product_name_en,['class'=>'form-control']) !!}
-        </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    {!! Form::open(['url'=>aurl('products'),'files'=>true]) !!}
+ 
+<hr>
 
-         <div class="form-group">
-            {!! Form::label('desc_ar',trans('admin.desc_ar')) !!}
-            {!! Form::text('desc_ar',$product->desc_ar,['class'=>'form-control']) !!}
-        </div>
+ <ul class="nav nav-tabs">
+      <li><a data-toggle="tab" href="#product_setting">    {{ trans('admin.product_setting') }}  <i class="fa fa-cog fa-spin"></i></a></li>
 
-         <div class="form-group">
-            {!! Form::label('desc_en',trans('admin.desc_en')) !!}
-            {!! Form::text('desc_en',$product->desc_en,['class'=>'form-control']) !!}
-        </div>
+  <li><a data-toggle="tab" href="#product_media">       {{ trans('admin.product_media') }}  <i class="fa fa-photo"></i></a></li>
+  
+   <!-- <li><a data-toggle="tab" href="#product_other_data">  {{ trans('admin.product_other_data') }} <i class="fa fa-database"></i></a></li>-->
+ </ul>
 
-         <div class="form-group">
-            {!! Form::label('price',trans('admin.price')) !!}
-            {!! Form::text('price',$product->price ,['class'=>'form-control']) !!}
-        </div>
+<div class="tab-content">
+ <div id="product_info" class="tab-pane fade in active">
+    <h3>Planes1</h3>
+    <p>{{ trans('admin.product_info') }}</p>
+  </div>
+
+ @include('admin.products.tabs.product_setting')
+    @include('admin.products.tabs.product_media')
+
+</div>
+<hr>
  
 
-        <div class="clearfix"></div>
-        <div id="jstree"></div>
-        <input type="hidden" name="department_id" class="department_id_id" value="{{ old('department_id') }}">
-        <div class="clearfix"></div>
+ 
+     {!! Form::close() !!}
+  </div>
+  <!-- /.box-body -->
         
-        
-      
-        {!! Form::submit(trans('admin.add'),['class'=>'btn btn-primary']) !!}
-        {!! Form::close() !!}
-    </div>
+     </div>
     <!-- /.box-body -->
 </div>
-<!-- /.box xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-
+ 
 
 @endsection
